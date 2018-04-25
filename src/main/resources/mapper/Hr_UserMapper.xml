@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_UserMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_User">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_job_number" jdbcType="VARCHAR" property="userJobNumber" />
+    <result column="user_sex" jdbcType="BIGINT" property="userSex" />
+    <result column="user_shop_number" jdbcType="VARCHAR" property="userShopNumber" />
+    <result column="user_department" jdbcType="BIGINT" property="userDepartment" />
+    <result column="user_post" jdbcType="BIGINT" property="userPost" />
+    <result column="user_post_grade" jdbcType="VARCHAR" property="userPostGrade" />
+    <result column="user_identity_card" jdbcType="VARCHAR" property="userIdentityCard" />
+    <result column="user_entry_time" jdbcType="DATE" property="userEntryTime" />
+    <result column="user_regular_time" jdbcType="DATE" property="userRegularTime" />
+    <result column="user_Yworking_age" jdbcType="BIGINT" property="userYworkingAge" />
+    <result column="user_Mworking_age" jdbcType="BIGINT" property="userMworkingAge" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_province" jdbcType="VARCHAR" property="userProvince" />
+    <result column="user_city" jdbcType="VARCHAR" property="userCity" />
+    <result column="user_area" jdbcType="VARCHAR" property="userArea" />
+    <result column="user_detailed_address" jdbcType="VARCHAR" property="userDetailedAddress" />
+    <result column="user_school" jdbcType="VARCHAR" property="userSchool" />
+    <result column="user_diploma" jdbcType="VARCHAR" property="userDiploma" />
+    <result column="user_state" jdbcType="BIGINT" property="userState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_name, user_job_number, user_sex, user_shop_number, user_department, 
+    user_post, user_post_grade, user_identity_card, user_entry_time, user_regular_time, 
+    user_Yworking_age, user_Mworking_age, user_phone, user_province, user_city, user_area, 
+    user_detailed_address, user_school, user_diploma, user_state
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_User">
+    insert into hr_user (user_id, user_name, user_job_number, 
+      user_sex, user_shop_number, user_department, 
+      user_post, user_post_grade, user_identity_card, 
+      user_entry_time, user_regular_time, user_Yworking_age, 
+      user_Mworking_age, user_phone, user_province, 
+      user_city, user_area, user_detailed_address, 
+      user_school, user_diploma, user_state
+      )
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userJobNumber,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=BIGINT}, #{userShopNumber,jdbcType=VARCHAR}, #{userDepartment,jdbcType=BIGINT}, 
+      #{userPost,jdbcType=BIGINT}, #{userPostGrade,jdbcType=VARCHAR}, #{userIdentityCard,jdbcType=VARCHAR}, 
+      #{userEntryTime,jdbcType=DATE}, #{userRegularTime,jdbcType=DATE}, #{userYworkingAge,jdbcType=BIGINT}, 
+      #{userMworkingAge,jdbcType=BIGINT}, #{userPhone,jdbcType=VARCHAR}, #{userProvince,jdbcType=VARCHAR}, 
+      #{userCity,jdbcType=VARCHAR}, #{userArea,jdbcType=VARCHAR}, #{userDetailedAddress,jdbcType=VARCHAR}, 
+      #{userSchool,jdbcType=VARCHAR}, #{userDiploma,jdbcType=VARCHAR}, #{userState,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_User">
+    insert into hr_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userJobNumber != null">
+        user_job_number,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userShopNumber != null">
+        user_shop_number,
+      </if>
+      <if test="userDepartment != null">
+        user_department,
+      </if>
+      <if test="userPost != null">
+        user_post,
+      </if>
+      <if test="userPostGrade != null">
+        user_post_grade,
+      </if>
+      <if test="userIdentityCard != null">
+        user_identity_card,
+      </if>
+      <if test="userEntryTime != null">
+        user_entry_time,
+      </if>
+      <if test="userRegularTime != null">
+        user_regular_time,
+      </if>
+      <if test="userYworkingAge != null">
+        user_Yworking_age,
+      </if>
+      <if test="userMworkingAge != null">
+        user_Mworking_age,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userProvince != null">
+        user_province,
+      </if>
+      <if test="userCity != null">
+        user_city,
+      </if>
+      <if test="userArea != null">
+        user_area,
+      </if>
+      <if test="userDetailedAddress != null">
+        user_detailed_address,
+      </if>
+      <if test="userSchool != null">
+        user_school,
+      </if>
+      <if test="userDiploma != null">
+        user_diploma,
+      </if>
+      <if test="userState != null">
+        user_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userJobNumber != null">
+        #{userJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=BIGINT},
+      </if>
+      <if test="userShopNumber != null">
+        #{userShopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartment != null">
+        #{userDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="userPost != null">
+        #{userPost,jdbcType=BIGINT},
+      </if>
+      <if test="userPostGrade != null">
+        #{userPostGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentityCard != null">
+        #{userIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntryTime != null">
+        #{userEntryTime,jdbcType=DATE},
+      </if>
+      <if test="userRegularTime != null">
+        #{userRegularTime,jdbcType=DATE},
+      </if>
+      <if test="userYworkingAge != null">
+        #{userYworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="userMworkingAge != null">
+        #{userMworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userProvince != null">
+        #{userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="userCity != null">
+        #{userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="userArea != null">
+        #{userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userDetailedAddress != null">
+        #{userDetailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userSchool != null">
+        #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userDiploma != null">
+        #{userDiploma,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        #{userState,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_UserExample" resultType="java.lang.Long">
+    select count(*) from hr_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userJobNumber != null">
+        user_job_number = #{record.userJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        user_sex = #{record.userSex,jdbcType=BIGINT},
+      </if>
+      <if test="record.userShopNumber != null">
+        user_shop_number = #{record.userShopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDepartment != null">
+        user_department = #{record.userDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="record.userPost != null">
+        user_post = #{record.userPost,jdbcType=BIGINT},
+      </if>
+      <if test="record.userPostGrade != null">
+        user_post_grade = #{record.userPostGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdentityCard != null">
+        user_identity_card = #{record.userIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEntryTime != null">
+        user_entry_time = #{record.userEntryTime,jdbcType=DATE},
+      </if>
+      <if test="record.userRegularTime != null">
+        user_regular_time = #{record.userRegularTime,jdbcType=DATE},
+      </if>
+      <if test="record.userYworkingAge != null">
+        user_Yworking_age = #{record.userYworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="record.userMworkingAge != null">
+        user_Mworking_age = #{record.userMworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userProvince != null">
+        user_province = #{record.userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCity != null">
+        user_city = #{record.userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userArea != null">
+        user_area = #{record.userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDetailedAddress != null">
+        user_detailed_address = #{record.userDetailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSchool != null">
+        user_school = #{record.userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDiploma != null">
+        user_diploma = #{record.userDiploma,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userState != null">
+        user_state = #{record.userState,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_user
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_job_number = #{record.userJobNumber,jdbcType=VARCHAR},
+      user_sex = #{record.userSex,jdbcType=BIGINT},
+      user_shop_number = #{record.userShopNumber,jdbcType=VARCHAR},
+      user_department = #{record.userDepartment,jdbcType=BIGINT},
+      user_post = #{record.userPost,jdbcType=BIGINT},
+      user_post_grade = #{record.userPostGrade,jdbcType=VARCHAR},
+      user_identity_card = #{record.userIdentityCard,jdbcType=VARCHAR},
+      user_entry_time = #{record.userEntryTime,jdbcType=DATE},
+      user_regular_time = #{record.userRegularTime,jdbcType=DATE},
+      user_Yworking_age = #{record.userYworkingAge,jdbcType=BIGINT},
+      user_Mworking_age = #{record.userMworkingAge,jdbcType=BIGINT},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_province = #{record.userProvince,jdbcType=VARCHAR},
+      user_city = #{record.userCity,jdbcType=VARCHAR},
+      user_area = #{record.userArea,jdbcType=VARCHAR},
+      user_detailed_address = #{record.userDetailedAddress,jdbcType=VARCHAR},
+      user_school = #{record.userSchool,jdbcType=VARCHAR},
+      user_diploma = #{record.userDiploma,jdbcType=VARCHAR},
+      user_state = #{record.userState,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_User">
+    update hr_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userJobNumber != null">
+        user_job_number = #{userJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=BIGINT},
+      </if>
+      <if test="userShopNumber != null">
+        user_shop_number = #{userShopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartment != null">
+        user_department = #{userDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="userPost != null">
+        user_post = #{userPost,jdbcType=BIGINT},
+      </if>
+      <if test="userPostGrade != null">
+        user_post_grade = #{userPostGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentityCard != null">
+        user_identity_card = #{userIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntryTime != null">
+        user_entry_time = #{userEntryTime,jdbcType=DATE},
+      </if>
+      <if test="userRegularTime != null">
+        user_regular_time = #{userRegularTime,jdbcType=DATE},
+      </if>
+      <if test="userYworkingAge != null">
+        user_Yworking_age = #{userYworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="userMworkingAge != null">
+        user_Mworking_age = #{userMworkingAge,jdbcType=BIGINT},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userProvince != null">
+        user_province = #{userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="userCity != null">
+        user_city = #{userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="userArea != null">
+        user_area = #{userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userDetailedAddress != null">
+        user_detailed_address = #{userDetailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userSchool != null">
+        user_school = #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userDiploma != null">
+        user_diploma = #{userDiploma,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        user_state = #{userState,jdbcType=BIGINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_User">
+    update hr_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_job_number = #{userJobNumber,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=BIGINT},
+      user_shop_number = #{userShopNumber,jdbcType=VARCHAR},
+      user_department = #{userDepartment,jdbcType=BIGINT},
+      user_post = #{userPost,jdbcType=BIGINT},
+      user_post_grade = #{userPostGrade,jdbcType=VARCHAR},
+      user_identity_card = #{userIdentityCard,jdbcType=VARCHAR},
+      user_entry_time = #{userEntryTime,jdbcType=DATE},
+      user_regular_time = #{userRegularTime,jdbcType=DATE},
+      user_Yworking_age = #{userYworkingAge,jdbcType=BIGINT},
+      user_Mworking_age = #{userMworkingAge,jdbcType=BIGINT},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_province = #{userProvince,jdbcType=VARCHAR},
+      user_city = #{userCity,jdbcType=VARCHAR},
+      user_area = #{userArea,jdbcType=VARCHAR},
+      user_detailed_address = #{userDetailedAddress,jdbcType=VARCHAR},
+      user_school = #{userSchool,jdbcType=VARCHAR},
+      user_diploma = #{userDiploma,jdbcType=VARCHAR},
+      user_state = #{userState,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

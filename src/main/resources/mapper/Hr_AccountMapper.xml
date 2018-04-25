@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_AccountMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Account">
+    <id column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="account_password" jdbcType="VARCHAR" property="accountPassword" />
+    <result column="account_login time" jdbcType="TIMESTAMP" property="accountLoginTime" />
+    <result column="account_status" jdbcType="BIGINT" property="accountStatus" />
+    <result column="account_userid" jdbcType="BIGINT" property="accountUserid" />
+    <result column="account_updatatime" jdbcType="TIMESTAMP" property="accountUpdatatime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    account_id, account_number, account_password, "account_login time", account_status, 
+    account_userid, account_updatatime
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_AccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Account">
+    insert into hr_account (account_id, account_number, account_password, 
+      "account_login time", account_status, account_userid, 
+      account_updatatime)
+    values (#{accountId,jdbcType=BIGINT}, #{accountNumber,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR}, 
+      #{accountLoginTime,jdbcType=TIMESTAMP}, #{accountStatus,jdbcType=BIGINT}, #{accountUserid,jdbcType=BIGINT}, 
+      #{accountUpdatatime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Account">
+    insert into hr_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="accountNumber != null">
+        account_number,
+      </if>
+      <if test="accountPassword != null">
+        account_password,
+      </if>
+      <if test="accountLoginTime != null">
+        "account_login time",
+      </if>
+      <if test="accountStatus != null">
+        account_status,
+      </if>
+      <if test="accountUserid != null">
+        account_userid,
+      </if>
+      <if test="accountUpdatatime != null">
+        account_updatatime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountNumber != null">
+        #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountLoginTime != null">
+        #{accountLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountStatus != null">
+        #{accountStatus,jdbcType=BIGINT},
+      </if>
+      <if test="accountUserid != null">
+        #{accountUserid,jdbcType=BIGINT},
+      </if>
+      <if test="accountUpdatatime != null">
+        #{accountUpdatatime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_AccountExample" resultType="java.lang.Long">
+    select count(*) from hr_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_account
+    <set>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.accountNumber != null">
+        account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountPassword != null">
+        account_password = #{record.accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountLoginTime != null">
+        "account_login time" = #{record.accountLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accountStatus != null">
+        account_status = #{record.accountStatus,jdbcType=BIGINT},
+      </if>
+      <if test="record.accountUserid != null">
+        account_userid = #{record.accountUserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.accountUpdatatime != null">
+        account_updatatime = #{record.accountUpdatatime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_account
+    set account_id = #{record.accountId,jdbcType=BIGINT},
+      account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      account_password = #{record.accountPassword,jdbcType=VARCHAR},
+      "account_login time" = #{record.accountLoginTime,jdbcType=TIMESTAMP},
+      account_status = #{record.accountStatus,jdbcType=BIGINT},
+      account_userid = #{record.accountUserid,jdbcType=BIGINT},
+      account_updatatime = #{record.accountUpdatatime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Account">
+    update hr_account
+    <set>
+      <if test="accountNumber != null">
+        account_number = #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountLoginTime != null">
+        "account_login time" = #{accountLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountStatus != null">
+        account_status = #{accountStatus,jdbcType=BIGINT},
+      </if>
+      <if test="accountUserid != null">
+        account_userid = #{accountUserid,jdbcType=BIGINT},
+      </if>
+      <if test="accountUpdatatime != null">
+        account_updatatime = #{accountUpdatatime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Account">
+    update hr_account
+    set account_number = #{accountNumber,jdbcType=VARCHAR},
+      account_password = #{accountPassword,jdbcType=VARCHAR},
+      "account_login time" = #{accountLoginTime,jdbcType=TIMESTAMP},
+      account_status = #{accountStatus,jdbcType=BIGINT},
+      account_userid = #{accountUserid,jdbcType=BIGINT},
+      account_updatatime = #{accountUpdatatime,jdbcType=TIMESTAMP}
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_AccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_OvertimeMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Overtime">
+    <id column="overtime_id" jdbcType="BIGINT" property="overtimeId" />
+    <result column="overtime_name" jdbcType="VARCHAR" property="overtimeName" />
+    <result column="overtime_duration" jdbcType="BIGINT" property="overtimeDuration" />
+    <result column="overtime_department" jdbcType="BIGINT" property="overtimeDepartment" />
+    <result column="overtime_shop" jdbcType="VARCHAR" property="overtimeShop" />
+    <result column="overtime_post" jdbcType="BIGINT" property="overtimePost" />
+    <result column="overtime_reason" jdbcType="VARCHAR" property="overtimeReason" />
+    <result column="overtime_verifier_id" jdbcType="BIGINT" property="overtimeVerifierId" />
+    <result column="overtime_time" jdbcType="DATE" property="overtimeTime" />
+    <result column="leave_tag" jdbcType="BIGINT" property="leaveTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    overtime_id, overtime_name, overtime_duration, overtime_department, overtime_shop, 
+    overtime_post, overtime_reason, overtime_verifier_id, overtime_time, leave_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_OvertimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_overtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_overtime
+    where overtime_id = #{overtimeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_overtime
+    where overtime_id = #{overtimeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Overtime">
+    insert into hr_overtime (overtime_id, overtime_name, overtime_duration, 
+      overtime_department, overtime_shop, overtime_post, 
+      overtime_reason, overtime_verifier_id, overtime_time, 
+      leave_tag)
+    values (#{overtimeId,jdbcType=BIGINT}, #{overtimeName,jdbcType=VARCHAR}, #{overtimeDuration,jdbcType=BIGINT}, 
+      #{overtimeDepartment,jdbcType=BIGINT}, #{overtimeShop,jdbcType=VARCHAR}, #{overtimePost,jdbcType=BIGINT}, 
+      #{overtimeReason,jdbcType=VARCHAR}, #{overtimeVerifierId,jdbcType=BIGINT}, #{overtimeTime,jdbcType=DATE}, 
+      #{leaveTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Overtime">
+    insert into hr_overtime
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="overtimeId != null">
+        overtime_id,
+      </if>
+      <if test="overtimeName != null">
+        overtime_name,
+      </if>
+      <if test="overtimeDuration != null">
+        overtime_duration,
+      </if>
+      <if test="overtimeDepartment != null">
+        overtime_department,
+      </if>
+      <if test="overtimeShop != null">
+        overtime_shop,
+      </if>
+      <if test="overtimePost != null">
+        overtime_post,
+      </if>
+      <if test="overtimeReason != null">
+        overtime_reason,
+      </if>
+      <if test="overtimeVerifierId != null">
+        overtime_verifier_id,
+      </if>
+      <if test="overtimeTime != null">
+        overtime_time,
+      </if>
+      <if test="leaveTag != null">
+        leave_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="overtimeId != null">
+        #{overtimeId,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeName != null">
+        #{overtimeName,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimeDuration != null">
+        #{overtimeDuration,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeDepartment != null">
+        #{overtimeDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeShop != null">
+        #{overtimeShop,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimePost != null">
+        #{overtimePost,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeReason != null">
+        #{overtimeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimeVerifierId != null">
+        #{overtimeVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeTime != null">
+        #{overtimeTime,jdbcType=DATE},
+      </if>
+      <if test="leaveTag != null">
+        #{leaveTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_OvertimeExample" resultType="java.lang.Long">
+    select count(*) from hr_overtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_overtime
+    <set>
+      <if test="record.overtimeId != null">
+        overtime_id = #{record.overtimeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.overtimeName != null">
+        overtime_name = #{record.overtimeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overtimeDuration != null">
+        overtime_duration = #{record.overtimeDuration,jdbcType=BIGINT},
+      </if>
+      <if test="record.overtimeDepartment != null">
+        overtime_department = #{record.overtimeDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="record.overtimeShop != null">
+        overtime_shop = #{record.overtimeShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overtimePost != null">
+        overtime_post = #{record.overtimePost,jdbcType=BIGINT},
+      </if>
+      <if test="record.overtimeReason != null">
+        overtime_reason = #{record.overtimeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overtimeVerifierId != null">
+        overtime_verifier_id = #{record.overtimeVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.overtimeTime != null">
+        overtime_time = #{record.overtimeTime,jdbcType=DATE},
+      </if>
+      <if test="record.leaveTag != null">
+        leave_tag = #{record.leaveTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_overtime
+    set overtime_id = #{record.overtimeId,jdbcType=BIGINT},
+      overtime_name = #{record.overtimeName,jdbcType=VARCHAR},
+      overtime_duration = #{record.overtimeDuration,jdbcType=BIGINT},
+      overtime_department = #{record.overtimeDepartment,jdbcType=BIGINT},
+      overtime_shop = #{record.overtimeShop,jdbcType=VARCHAR},
+      overtime_post = #{record.overtimePost,jdbcType=BIGINT},
+      overtime_reason = #{record.overtimeReason,jdbcType=VARCHAR},
+      overtime_verifier_id = #{record.overtimeVerifierId,jdbcType=BIGINT},
+      overtime_time = #{record.overtimeTime,jdbcType=DATE},
+      leave_tag = #{record.leaveTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Overtime">
+    update hr_overtime
+    <set>
+      <if test="overtimeName != null">
+        overtime_name = #{overtimeName,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimeDuration != null">
+        overtime_duration = #{overtimeDuration,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeDepartment != null">
+        overtime_department = #{overtimeDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeShop != null">
+        overtime_shop = #{overtimeShop,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimePost != null">
+        overtime_post = #{overtimePost,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeReason != null">
+        overtime_reason = #{overtimeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="overtimeVerifierId != null">
+        overtime_verifier_id = #{overtimeVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="overtimeTime != null">
+        overtime_time = #{overtimeTime,jdbcType=DATE},
+      </if>
+      <if test="leaveTag != null">
+        leave_tag = #{leaveTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where overtime_id = #{overtimeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Overtime">
+    update hr_overtime
+    set overtime_name = #{overtimeName,jdbcType=VARCHAR},
+      overtime_duration = #{overtimeDuration,jdbcType=BIGINT},
+      overtime_department = #{overtimeDepartment,jdbcType=BIGINT},
+      overtime_shop = #{overtimeShop,jdbcType=VARCHAR},
+      overtime_post = #{overtimePost,jdbcType=BIGINT},
+      overtime_reason = #{overtimeReason,jdbcType=VARCHAR},
+      overtime_verifier_id = #{overtimeVerifierId,jdbcType=BIGINT},
+      overtime_time = #{overtimeTime,jdbcType=DATE},
+      leave_tag = #{leaveTag,jdbcType=BIGINT}
+    where overtime_id = #{overtimeId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_OvertimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_overtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

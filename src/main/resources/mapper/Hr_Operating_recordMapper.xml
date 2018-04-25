@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_Operating_recordMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Operating_record">
+    <id column="operating_record_id" jdbcType="BIGINT" property="operatingRecordId" />
+    <result column="operating_recor_name" jdbcType="VARCHAR" property="operatingRecorName" />
+    <result column="operating_record_department" jdbcType="VARCHAR" property="operatingRecordDepartment" />
+    <result column="operating_record_bdepartment" jdbcType="VARCHAR" property="operatingRecordBdepartment" />
+    <result column="operating_record_bname" jdbcType="VARCHAR" property="operatingRecordBname" />
+    <result column="operating_record_thing" jdbcType="VARCHAR" property="operatingRecordThing" />
+    <result column="operating_record_time" jdbcType="TIMESTAMP" property="operatingRecordTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    operating_record_id, operating_recor_name, operating_record_department, operating_record_bdepartment, 
+    operating_record_bname, operating_record_thing, operating_record_time
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_Operating_recordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_operating_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_operating_record
+    where operating_record_id = #{operatingRecordId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_operating_record
+    where operating_record_id = #{operatingRecordId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Operating_record">
+    insert into hr_operating_record (operating_record_id, operating_recor_name, 
+      operating_record_department, operating_record_bdepartment, 
+      operating_record_bname, operating_record_thing, 
+      operating_record_time)
+    values (#{operatingRecordId,jdbcType=BIGINT}, #{operatingRecorName,jdbcType=VARCHAR}, 
+      #{operatingRecordDepartment,jdbcType=VARCHAR}, #{operatingRecordBdepartment,jdbcType=VARCHAR}, 
+      #{operatingRecordBname,jdbcType=VARCHAR}, #{operatingRecordThing,jdbcType=VARCHAR}, 
+      #{operatingRecordTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Operating_record">
+    insert into hr_operating_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operatingRecordId != null">
+        operating_record_id,
+      </if>
+      <if test="operatingRecorName != null">
+        operating_recor_name,
+      </if>
+      <if test="operatingRecordDepartment != null">
+        operating_record_department,
+      </if>
+      <if test="operatingRecordBdepartment != null">
+        operating_record_bdepartment,
+      </if>
+      <if test="operatingRecordBname != null">
+        operating_record_bname,
+      </if>
+      <if test="operatingRecordThing != null">
+        operating_record_thing,
+      </if>
+      <if test="operatingRecordTime != null">
+        operating_record_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operatingRecordId != null">
+        #{operatingRecordId,jdbcType=BIGINT},
+      </if>
+      <if test="operatingRecorName != null">
+        #{operatingRecorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordDepartment != null">
+        #{operatingRecordDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordBdepartment != null">
+        #{operatingRecordBdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordBname != null">
+        #{operatingRecordBname,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordThing != null">
+        #{operatingRecordThing,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordTime != null">
+        #{operatingRecordTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_Operating_recordExample" resultType="java.lang.Long">
+    select count(*) from hr_operating_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_operating_record
+    <set>
+      <if test="record.operatingRecordId != null">
+        operating_record_id = #{record.operatingRecordId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operatingRecorName != null">
+        operating_recor_name = #{record.operatingRecorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingRecordDepartment != null">
+        operating_record_department = #{record.operatingRecordDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingRecordBdepartment != null">
+        operating_record_bdepartment = #{record.operatingRecordBdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingRecordBname != null">
+        operating_record_bname = #{record.operatingRecordBname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingRecordThing != null">
+        operating_record_thing = #{record.operatingRecordThing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingRecordTime != null">
+        operating_record_time = #{record.operatingRecordTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_operating_record
+    set operating_record_id = #{record.operatingRecordId,jdbcType=BIGINT},
+      operating_recor_name = #{record.operatingRecorName,jdbcType=VARCHAR},
+      operating_record_department = #{record.operatingRecordDepartment,jdbcType=VARCHAR},
+      operating_record_bdepartment = #{record.operatingRecordBdepartment,jdbcType=VARCHAR},
+      operating_record_bname = #{record.operatingRecordBname,jdbcType=VARCHAR},
+      operating_record_thing = #{record.operatingRecordThing,jdbcType=VARCHAR},
+      operating_record_time = #{record.operatingRecordTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Operating_record">
+    update hr_operating_record
+    <set>
+      <if test="operatingRecorName != null">
+        operating_recor_name = #{operatingRecorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordDepartment != null">
+        operating_record_department = #{operatingRecordDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordBdepartment != null">
+        operating_record_bdepartment = #{operatingRecordBdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordBname != null">
+        operating_record_bname = #{operatingRecordBname,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordThing != null">
+        operating_record_thing = #{operatingRecordThing,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingRecordTime != null">
+        operating_record_time = #{operatingRecordTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where operating_record_id = #{operatingRecordId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Operating_record">
+    update hr_operating_record
+    set operating_recor_name = #{operatingRecorName,jdbcType=VARCHAR},
+      operating_record_department = #{operatingRecordDepartment,jdbcType=VARCHAR},
+      operating_record_bdepartment = #{operatingRecordBdepartment,jdbcType=VARCHAR},
+      operating_record_bname = #{operatingRecordBname,jdbcType=VARCHAR},
+      operating_record_thing = #{operatingRecordThing,jdbcType=VARCHAR},
+      operating_record_time = #{operatingRecordTime,jdbcType=TIMESTAMP}
+    where operating_record_id = #{operatingRecordId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_Operating_recordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_operating_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

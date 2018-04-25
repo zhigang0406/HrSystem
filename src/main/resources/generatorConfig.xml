@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--数据库驱动 -->
+    <!-- <classPathEntry location="/Users/Mrmodel/.m2/repository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"
+        /> -->
+    <!-- <classPathEntry location="C:\aaa\mysql-connector-java-5.1.40.jar" /> -->
+    <!--<classPathEntry location="/Users/Maker/Desktop/mysql-connector-java-5.1.40.jar"
+        /> -->
+    <!--<classPathEntry location="D:/code/mysql-connector-java-5.1.40.jar" /
+        <classPathEntry location="C:\aaa\mysql-connector-java-5.1.40.jar" /> -->
+    <!-- <classPathEntry -->
+    <!-- location="C:\Users\jsm\.m2\repository\mysql\mysql-connector-java\5.1.40"
+        /> -->
+
+    <!--<classPathEntry location="E:\mysql-connector-java-5.1.40.jar"/>-->
+    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.40/mysql-connector-java-5.1.40.jar"
+    />
+    <!--<classPathEntry location="C:\Users/dd/.m2/repository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"-->
+    <!--/>-->
+    <!-- location="C:\Users\jsm\.m2\repository\mysql\mysql-connector-java\5.1.40"
+        /> -->
+
+    <context id="MySqlTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin">
+        </plugin>
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost/hrtable?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.scorponok.base.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.scorponok.base.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+ <!--      <table tableName="hat_area" domainObjectName="Hat_Area"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+       <table tableName="hat_city" domainObjectName="Hat_City"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+       <table tableName="hat_province" domainObjectName="Hat_Province"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_account" domainObjectName="Hr_Account"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_area" domainObjectName="Hr_Area"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_brand" domainObjectName="Hr_Brand"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_department" domainObjectName="Hr_Department"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_post" domainObjectName="Hr_Post"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_shop" domainObjectName="Hr_Shop"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_leave" domainObjectName="Hr_Leave"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_operating_record" domainObjectName="Hr_Operating_record"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_overtime" domainObjectName="Hr_Overtime"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>-->
+      <table tableName="hr_salary" domainObjectName="Hr_Salary"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <!-- <table tableName="hr_salary_template" domainObjectName="Hr_Salary_Template"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_transfer" domainObjectName="Hr_Transfer"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>
+        <table tableName="hr_user" domainObjectName="Hr_User"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="false" enableSelectByExample="true">
+        </table>-->
+    </context>
+</generatorConfiguration>

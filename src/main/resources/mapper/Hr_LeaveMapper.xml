@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_LeaveMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Leave">
+    <id column="leave_id" jdbcType="BIGINT" property="leaveId" />
+    <result column="leave_name" jdbcType="VARCHAR" property="leaveName" />
+    <result column="leave_day" jdbcType="BIGINT" property="leaveDay" />
+    <result column="leave_department" jdbcType="BIGINT" property="leaveDepartment" />
+    <result column="leave_post" jdbcType="BIGINT" property="leavePost" />
+    <result column="leave_shop" jdbcType="VARCHAR" property="leaveShop" />
+    <result column="leave_reason" jdbcType="VARCHAR" property="leaveReason" />
+    <result column="leave__verifier_id" jdbcType="BIGINT" property="leaveVerifierId" />
+    <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="leave_tag" jdbcType="BIGINT" property="leaveTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    leave_id, leave_name, leave_day, leave_department, leave_post, leave_shop, leave_reason, 
+    leave__verifier_id, leave_time, leave_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_LeaveExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_leave
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_leave
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Leave">
+    insert into hr_leave (leave_id, leave_name, leave_day, 
+      leave_department, leave_post, leave_shop, 
+      leave_reason, leave__verifier_id, leave_time, 
+      leave_tag)
+    values (#{leaveId,jdbcType=BIGINT}, #{leaveName,jdbcType=VARCHAR}, #{leaveDay,jdbcType=BIGINT}, 
+      #{leaveDepartment,jdbcType=BIGINT}, #{leavePost,jdbcType=BIGINT}, #{leaveShop,jdbcType=VARCHAR}, 
+      #{leaveReason,jdbcType=VARCHAR}, #{leaveVerifierId,jdbcType=BIGINT}, #{leaveTime,jdbcType=TIMESTAMP}, 
+      #{leaveTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Leave">
+    insert into hr_leave
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="leaveId != null">
+        leave_id,
+      </if>
+      <if test="leaveName != null">
+        leave_name,
+      </if>
+      <if test="leaveDay != null">
+        leave_day,
+      </if>
+      <if test="leaveDepartment != null">
+        leave_department,
+      </if>
+      <if test="leavePost != null">
+        leave_post,
+      </if>
+      <if test="leaveShop != null">
+        leave_shop,
+      </if>
+      <if test="leaveReason != null">
+        leave_reason,
+      </if>
+      <if test="leaveVerifierId != null">
+        leave__verifier_id,
+      </if>
+      <if test="leaveTime != null">
+        leave_time,
+      </if>
+      <if test="leaveTag != null">
+        leave_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="leaveId != null">
+        #{leaveId,jdbcType=BIGINT},
+      </if>
+      <if test="leaveName != null">
+        #{leaveName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveDay != null">
+        #{leaveDay,jdbcType=BIGINT},
+      </if>
+      <if test="leaveDepartment != null">
+        #{leaveDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="leavePost != null">
+        #{leavePost,jdbcType=BIGINT},
+      </if>
+      <if test="leaveShop != null">
+        #{leaveShop,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveReason != null">
+        #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveVerifierId != null">
+        #{leaveVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTag != null">
+        #{leaveTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_LeaveExample" resultType="java.lang.Long">
+    select count(*) from hr_leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_leave
+    <set>
+      <if test="record.leaveId != null">
+        leave_id = #{record.leaveId,jdbcType=BIGINT},
+      </if>
+      <if test="record.leaveName != null">
+        leave_name = #{record.leaveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveDay != null">
+        leave_day = #{record.leaveDay,jdbcType=BIGINT},
+      </if>
+      <if test="record.leaveDepartment != null">
+        leave_department = #{record.leaveDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="record.leavePost != null">
+        leave_post = #{record.leavePost,jdbcType=BIGINT},
+      </if>
+      <if test="record.leaveShop != null">
+        leave_shop = #{record.leaveShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveReason != null">
+        leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveVerifierId != null">
+        leave__verifier_id = #{record.leaveVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.leaveTime != null">
+        leave_time = #{record.leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveTag != null">
+        leave_tag = #{record.leaveTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_leave
+    set leave_id = #{record.leaveId,jdbcType=BIGINT},
+      leave_name = #{record.leaveName,jdbcType=VARCHAR},
+      leave_day = #{record.leaveDay,jdbcType=BIGINT},
+      leave_department = #{record.leaveDepartment,jdbcType=BIGINT},
+      leave_post = #{record.leavePost,jdbcType=BIGINT},
+      leave_shop = #{record.leaveShop,jdbcType=VARCHAR},
+      leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      leave__verifier_id = #{record.leaveVerifierId,jdbcType=BIGINT},
+      leave_time = #{record.leaveTime,jdbcType=TIMESTAMP},
+      leave_tag = #{record.leaveTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Leave">
+    update hr_leave
+    <set>
+      <if test="leaveName != null">
+        leave_name = #{leaveName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveDay != null">
+        leave_day = #{leaveDay,jdbcType=BIGINT},
+      </if>
+      <if test="leaveDepartment != null">
+        leave_department = #{leaveDepartment,jdbcType=BIGINT},
+      </if>
+      <if test="leavePost != null">
+        leave_post = #{leavePost,jdbcType=BIGINT},
+      </if>
+      <if test="leaveShop != null">
+        leave_shop = #{leaveShop,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveReason != null">
+        leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveVerifierId != null">
+        leave__verifier_id = #{leaveVerifierId,jdbcType=BIGINT},
+      </if>
+      <if test="leaveTime != null">
+        leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTag != null">
+        leave_tag = #{leaveTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Leave">
+    update hr_leave
+    set leave_name = #{leaveName,jdbcType=VARCHAR},
+      leave_day = #{leaveDay,jdbcType=BIGINT},
+      leave_department = #{leaveDepartment,jdbcType=BIGINT},
+      leave_post = #{leavePost,jdbcType=BIGINT},
+      leave_shop = #{leaveShop,jdbcType=VARCHAR},
+      leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      leave__verifier_id = #{leaveVerifierId,jdbcType=BIGINT},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      leave_tag = #{leaveTag,jdbcType=BIGINT}
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_LeaveExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

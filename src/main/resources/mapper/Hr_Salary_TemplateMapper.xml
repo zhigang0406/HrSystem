@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_Salary_TemplateMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Salary_Template">
+    <id column="template_id" jdbcType="BIGINT" property="templateId" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="tc_it85" jdbcType="DOUBLE" property="tcIt85" />
+    <result column="tc_gteq85it90" jdbcType="DOUBLE" property="tcGteq85it90" />
+    <result column="tc_gteq90it95" jdbcType="DOUBLE" property="tcGteq90it95" />
+    <result column="tc_gteq95it100" jdbcType="DOUBLE" property="tcGteq95it100" />
+    <result column="tc_gteq100it110" jdbcType="DOUBLE" property="tcGteq100it110" />
+    <result column="tc_gteq110" jdbcType="DOUBLE" property="tcGteq110" />
+    <result column="tc_gteq100it110CB" jdbcType="DOUBLE" property="tcGteq100it110cb" />
+    <result column="tc_gteq110CB" jdbcType="DOUBLE" property="tcGteq110cb" />
+    <result column="award_it95" jdbcType="BIGINT" property="awardIt95" />
+    <result column="award_gteq95it100" jdbcType="BIGINT" property="awardGteq95it100" />
+    <result column="award_gteq100it103" jdbcType="BIGINT" property="awardGteq100it103" />
+    <result column="award_it100" jdbcType="BIGINT" property="awardIt100" />
+    <result column="award_gteq100it110" jdbcType="BIGINT" property="awardGteq100it110" />
+    <result column="award_gteq110it120" jdbcType="BIGINT" property="awardGteq110it120" />
+    <result column="awrard_gteq120" jdbcType="BIGINT" property="awrardGteq120" />
+    <result column="award_gteq100" jdbcType="BIGINT" property="awardGteq100" />
+    <result column="award_gteq103" jdbcType="BIGINT" property="awardGteq103" />
+    <result column="rank1_money" jdbcType="BIGINT" property="rank1Money" />
+    <result column="rank2_money" jdbcType="BIGINT" property="rank2Money" />
+    <result column="rank3_money" jdbcType="BIGINT" property="rank3Money" />
+    <result column="rank4_money" jdbcType="BIGINT" property="rank4Money" />
+    <result column="rank5_money" jdbcType="BIGINT" property="rank5Money" />
+    <result column="performance_money" jdbcType="BIGINT" property="performanceMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    template_id, template_name, tc_it85, tc_gteq85it90, tc_gteq90it95, tc_gteq95it100, 
+    tc_gteq100it110, tc_gteq110, tc_gteq100it110CB, tc_gteq110CB, award_it95, award_gteq95it100, 
+    award_gteq100it103, award_it100, award_gteq100it110, award_gteq110it120, awrard_gteq120, 
+    award_gteq100, award_gteq103, rank1_money, rank2_money, rank3_money, rank4_money, 
+    rank5_money, performance_money
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_Salary_TemplateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_salary_template
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_salary_template
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Salary_Template">
+    insert into hr_salary_template (template_id, template_name, tc_it85, 
+      tc_gteq85it90, tc_gteq90it95, tc_gteq95it100, 
+      tc_gteq100it110, tc_gteq110, tc_gteq100it110CB, 
+      tc_gteq110CB, award_it95, award_gteq95it100, 
+      award_gteq100it103, award_it100, award_gteq100it110, 
+      award_gteq110it120, awrard_gteq120, award_gteq100, 
+      award_gteq103, rank1_money, rank2_money, 
+      rank3_money, rank4_money, rank5_money, 
+      performance_money)
+    values (#{templateId,jdbcType=BIGINT}, #{templateName,jdbcType=VARCHAR}, #{tcIt85,jdbcType=DOUBLE}, 
+      #{tcGteq85it90,jdbcType=DOUBLE}, #{tcGteq90it95,jdbcType=DOUBLE}, #{tcGteq95it100,jdbcType=DOUBLE}, 
+      #{tcGteq100it110,jdbcType=DOUBLE}, #{tcGteq110,jdbcType=DOUBLE}, #{tcGteq100it110cb,jdbcType=DOUBLE}, 
+      #{tcGteq110cb,jdbcType=DOUBLE}, #{awardIt95,jdbcType=BIGINT}, #{awardGteq95it100,jdbcType=BIGINT}, 
+      #{awardGteq100it103,jdbcType=BIGINT}, #{awardIt100,jdbcType=BIGINT}, #{awardGteq100it110,jdbcType=BIGINT}, 
+      #{awardGteq110it120,jdbcType=BIGINT}, #{awrardGteq120,jdbcType=BIGINT}, #{awardGteq100,jdbcType=BIGINT}, 
+      #{awardGteq103,jdbcType=BIGINT}, #{rank1Money,jdbcType=BIGINT}, #{rank2Money,jdbcType=BIGINT}, 
+      #{rank3Money,jdbcType=BIGINT}, #{rank4Money,jdbcType=BIGINT}, #{rank5Money,jdbcType=BIGINT}, 
+      #{performanceMoney,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Salary_Template">
+    insert into hr_salary_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="tcIt85 != null">
+        tc_it85,
+      </if>
+      <if test="tcGteq85it90 != null">
+        tc_gteq85it90,
+      </if>
+      <if test="tcGteq90it95 != null">
+        tc_gteq90it95,
+      </if>
+      <if test="tcGteq95it100 != null">
+        tc_gteq95it100,
+      </if>
+      <if test="tcGteq100it110 != null">
+        tc_gteq100it110,
+      </if>
+      <if test="tcGteq110 != null">
+        tc_gteq110,
+      </if>
+      <if test="tcGteq100it110cb != null">
+        tc_gteq100it110CB,
+      </if>
+      <if test="tcGteq110cb != null">
+        tc_gteq110CB,
+      </if>
+      <if test="awardIt95 != null">
+        award_it95,
+      </if>
+      <if test="awardGteq95it100 != null">
+        award_gteq95it100,
+      </if>
+      <if test="awardGteq100it103 != null">
+        award_gteq100it103,
+      </if>
+      <if test="awardIt100 != null">
+        award_it100,
+      </if>
+      <if test="awardGteq100it110 != null">
+        award_gteq100it110,
+      </if>
+      <if test="awardGteq110it120 != null">
+        award_gteq110it120,
+      </if>
+      <if test="awrardGteq120 != null">
+        awrard_gteq120,
+      </if>
+      <if test="awardGteq100 != null">
+        award_gteq100,
+      </if>
+      <if test="awardGteq103 != null">
+        award_gteq103,
+      </if>
+      <if test="rank1Money != null">
+        rank1_money,
+      </if>
+      <if test="rank2Money != null">
+        rank2_money,
+      </if>
+      <if test="rank3Money != null">
+        rank3_money,
+      </if>
+      <if test="rank4Money != null">
+        rank4_money,
+      </if>
+      <if test="rank5Money != null">
+        rank5_money,
+      </if>
+      <if test="performanceMoney != null">
+        performance_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="tcIt85 != null">
+        #{tcIt85,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq85it90 != null">
+        #{tcGteq85it90,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq90it95 != null">
+        #{tcGteq90it95,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq95it100 != null">
+        #{tcGteq95it100,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq100it110 != null">
+        #{tcGteq100it110,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq110 != null">
+        #{tcGteq110,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq100it110cb != null">
+        #{tcGteq100it110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq110cb != null">
+        #{tcGteq110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="awardIt95 != null">
+        #{awardIt95,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq95it100 != null">
+        #{awardGteq95it100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100it103 != null">
+        #{awardGteq100it103,jdbcType=BIGINT},
+      </if>
+      <if test="awardIt100 != null">
+        #{awardIt100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100it110 != null">
+        #{awardGteq100it110,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq110it120 != null">
+        #{awardGteq110it120,jdbcType=BIGINT},
+      </if>
+      <if test="awrardGteq120 != null">
+        #{awrardGteq120,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100 != null">
+        #{awardGteq100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq103 != null">
+        #{awardGteq103,jdbcType=BIGINT},
+      </if>
+      <if test="rank1Money != null">
+        #{rank1Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank2Money != null">
+        #{rank2Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank3Money != null">
+        #{rank3Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank4Money != null">
+        #{rank4Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank5Money != null">
+        #{rank5Money,jdbcType=BIGINT},
+      </if>
+      <if test="performanceMoney != null">
+        #{performanceMoney,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_Salary_TemplateExample" resultType="java.lang.Long">
+    select count(*) from hr_salary_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_salary_template
+    <set>
+      <if test="record.templateId != null">
+        template_id = #{record.templateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.templateName != null">
+        template_name = #{record.templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcIt85 != null">
+        tc_it85 = #{record.tcIt85,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq85it90 != null">
+        tc_gteq85it90 = #{record.tcGteq85it90,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq90it95 != null">
+        tc_gteq90it95 = #{record.tcGteq90it95,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq95it100 != null">
+        tc_gteq95it100 = #{record.tcGteq95it100,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq100it110 != null">
+        tc_gteq100it110 = #{record.tcGteq100it110,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq110 != null">
+        tc_gteq110 = #{record.tcGteq110,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq100it110cb != null">
+        tc_gteq100it110CB = #{record.tcGteq100it110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tcGteq110cb != null">
+        tc_gteq110CB = #{record.tcGteq110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.awardIt95 != null">
+        award_it95 = #{record.awardIt95,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq95it100 != null">
+        award_gteq95it100 = #{record.awardGteq95it100,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq100it103 != null">
+        award_gteq100it103 = #{record.awardGteq100it103,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardIt100 != null">
+        award_it100 = #{record.awardIt100,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq100it110 != null">
+        award_gteq100it110 = #{record.awardGteq100it110,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq110it120 != null">
+        award_gteq110it120 = #{record.awardGteq110it120,jdbcType=BIGINT},
+      </if>
+      <if test="record.awrardGteq120 != null">
+        awrard_gteq120 = #{record.awrardGteq120,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq100 != null">
+        award_gteq100 = #{record.awardGteq100,jdbcType=BIGINT},
+      </if>
+      <if test="record.awardGteq103 != null">
+        award_gteq103 = #{record.awardGteq103,jdbcType=BIGINT},
+      </if>
+      <if test="record.rank1Money != null">
+        rank1_money = #{record.rank1Money,jdbcType=BIGINT},
+      </if>
+      <if test="record.rank2Money != null">
+        rank2_money = #{record.rank2Money,jdbcType=BIGINT},
+      </if>
+      <if test="record.rank3Money != null">
+        rank3_money = #{record.rank3Money,jdbcType=BIGINT},
+      </if>
+      <if test="record.rank4Money != null">
+        rank4_money = #{record.rank4Money,jdbcType=BIGINT},
+      </if>
+      <if test="record.rank5Money != null">
+        rank5_money = #{record.rank5Money,jdbcType=BIGINT},
+      </if>
+      <if test="record.performanceMoney != null">
+        performance_money = #{record.performanceMoney,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_salary_template
+    set template_id = #{record.templateId,jdbcType=BIGINT},
+      template_name = #{record.templateName,jdbcType=VARCHAR},
+      tc_it85 = #{record.tcIt85,jdbcType=DOUBLE},
+      tc_gteq85it90 = #{record.tcGteq85it90,jdbcType=DOUBLE},
+      tc_gteq90it95 = #{record.tcGteq90it95,jdbcType=DOUBLE},
+      tc_gteq95it100 = #{record.tcGteq95it100,jdbcType=DOUBLE},
+      tc_gteq100it110 = #{record.tcGteq100it110,jdbcType=DOUBLE},
+      tc_gteq110 = #{record.tcGteq110,jdbcType=DOUBLE},
+      tc_gteq100it110CB = #{record.tcGteq100it110cb,jdbcType=DOUBLE},
+      tc_gteq110CB = #{record.tcGteq110cb,jdbcType=DOUBLE},
+      award_it95 = #{record.awardIt95,jdbcType=BIGINT},
+      award_gteq95it100 = #{record.awardGteq95it100,jdbcType=BIGINT},
+      award_gteq100it103 = #{record.awardGteq100it103,jdbcType=BIGINT},
+      award_it100 = #{record.awardIt100,jdbcType=BIGINT},
+      award_gteq100it110 = #{record.awardGteq100it110,jdbcType=BIGINT},
+      award_gteq110it120 = #{record.awardGteq110it120,jdbcType=BIGINT},
+      awrard_gteq120 = #{record.awrardGteq120,jdbcType=BIGINT},
+      award_gteq100 = #{record.awardGteq100,jdbcType=BIGINT},
+      award_gteq103 = #{record.awardGteq103,jdbcType=BIGINT},
+      rank1_money = #{record.rank1Money,jdbcType=BIGINT},
+      rank2_money = #{record.rank2Money,jdbcType=BIGINT},
+      rank3_money = #{record.rank3Money,jdbcType=BIGINT},
+      rank4_money = #{record.rank4Money,jdbcType=BIGINT},
+      rank5_money = #{record.rank5Money,jdbcType=BIGINT},
+      performance_money = #{record.performanceMoney,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Salary_Template">
+    update hr_salary_template
+    <set>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="tcIt85 != null">
+        tc_it85 = #{tcIt85,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq85it90 != null">
+        tc_gteq85it90 = #{tcGteq85it90,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq90it95 != null">
+        tc_gteq90it95 = #{tcGteq90it95,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq95it100 != null">
+        tc_gteq95it100 = #{tcGteq95it100,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq100it110 != null">
+        tc_gteq100it110 = #{tcGteq100it110,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq110 != null">
+        tc_gteq110 = #{tcGteq110,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq100it110cb != null">
+        tc_gteq100it110CB = #{tcGteq100it110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="tcGteq110cb != null">
+        tc_gteq110CB = #{tcGteq110cb,jdbcType=DOUBLE},
+      </if>
+      <if test="awardIt95 != null">
+        award_it95 = #{awardIt95,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq95it100 != null">
+        award_gteq95it100 = #{awardGteq95it100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100it103 != null">
+        award_gteq100it103 = #{awardGteq100it103,jdbcType=BIGINT},
+      </if>
+      <if test="awardIt100 != null">
+        award_it100 = #{awardIt100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100it110 != null">
+        award_gteq100it110 = #{awardGteq100it110,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq110it120 != null">
+        award_gteq110it120 = #{awardGteq110it120,jdbcType=BIGINT},
+      </if>
+      <if test="awrardGteq120 != null">
+        awrard_gteq120 = #{awrardGteq120,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq100 != null">
+        award_gteq100 = #{awardGteq100,jdbcType=BIGINT},
+      </if>
+      <if test="awardGteq103 != null">
+        award_gteq103 = #{awardGteq103,jdbcType=BIGINT},
+      </if>
+      <if test="rank1Money != null">
+        rank1_money = #{rank1Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank2Money != null">
+        rank2_money = #{rank2Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank3Money != null">
+        rank3_money = #{rank3Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank4Money != null">
+        rank4_money = #{rank4Money,jdbcType=BIGINT},
+      </if>
+      <if test="rank5Money != null">
+        rank5_money = #{rank5Money,jdbcType=BIGINT},
+      </if>
+      <if test="performanceMoney != null">
+        performance_money = #{performanceMoney,jdbcType=BIGINT},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Salary_Template">
+    update hr_salary_template
+    set template_name = #{templateName,jdbcType=VARCHAR},
+      tc_it85 = #{tcIt85,jdbcType=DOUBLE},
+      tc_gteq85it90 = #{tcGteq85it90,jdbcType=DOUBLE},
+      tc_gteq90it95 = #{tcGteq90it95,jdbcType=DOUBLE},
+      tc_gteq95it100 = #{tcGteq95it100,jdbcType=DOUBLE},
+      tc_gteq100it110 = #{tcGteq100it110,jdbcType=DOUBLE},
+      tc_gteq110 = #{tcGteq110,jdbcType=DOUBLE},
+      tc_gteq100it110CB = #{tcGteq100it110cb,jdbcType=DOUBLE},
+      tc_gteq110CB = #{tcGteq110cb,jdbcType=DOUBLE},
+      award_it95 = #{awardIt95,jdbcType=BIGINT},
+      award_gteq95it100 = #{awardGteq95it100,jdbcType=BIGINT},
+      award_gteq100it103 = #{awardGteq100it103,jdbcType=BIGINT},
+      award_it100 = #{awardIt100,jdbcType=BIGINT},
+      award_gteq100it110 = #{awardGteq100it110,jdbcType=BIGINT},
+      award_gteq110it120 = #{awardGteq110it120,jdbcType=BIGINT},
+      awrard_gteq120 = #{awrardGteq120,jdbcType=BIGINT},
+      award_gteq100 = #{awardGteq100,jdbcType=BIGINT},
+      award_gteq103 = #{awardGteq103,jdbcType=BIGINT},
+      rank1_money = #{rank1Money,jdbcType=BIGINT},
+      rank2_money = #{rank2Money,jdbcType=BIGINT},
+      rank3_money = #{rank3Money,jdbcType=BIGINT},
+      rank4_money = #{rank4Money,jdbcType=BIGINT},
+      rank5_money = #{rank5Money,jdbcType=BIGINT},
+      performance_money = #{performanceMoney,jdbcType=BIGINT}
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_Salary_TemplateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

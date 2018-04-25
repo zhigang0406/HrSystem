@@ -1,0 +1,2008 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_SalaryMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Salary">
+    <id column="salary_id" jdbcType="BIGINT" property="salaryId" />
+    <result column="salary_basic" jdbcType="DOUBLE" property="salaryBasic" />
+    <result column="salary_rank" jdbcType="DOUBLE" property="salaryRank" />
+    <result column="salary_area" jdbcType="DOUBLE" property="salaryArea" />
+    <result column="salary_bonus" jdbcType="DOUBLE" property="salaryBonus" />
+    <result column="salary_traffic" jdbcType="DOUBLE" property="salaryTraffic" />
+    <result column="salary_meal_subsidy" jdbcType="DOUBLE" property="salaryMealSubsidy" />
+    <result column="salary_ working_age" jdbcType="DOUBLE" property="salaryWorkingAge" />
+    <result column="salary_social_subsidies" jdbcType="DOUBLE" property="salarySocialSubsidies" />
+    <result column="salary_persion" jdbcType="DOUBLE" property="salaryPersion" />
+    <result column="salary_shop" jdbcType="DOUBLE" property="salaryShop" />
+    <result column="salary_overtime" jdbcType="DOUBLE" property="salaryOvertime" />
+    <result column="salary_work" jdbcType="DOUBLE" property="salaryWork" />
+    <result column="deduct_inventory" jdbcType="DOUBLE" property="deductInventory" />
+    <result column="deduct_Late sales" jdbcType="DOUBLE" property="deductLateSales" />
+    <result column="deduct_social" jdbcType="DOUBLE" property="deductSocial" />
+    <result column="deduct_uniform" jdbcType="DOUBLE" property="deductUniform" />
+    <result column="deduct_other" jdbcType="DOUBLE" property="deductOther" />
+    <result column="salary_other" jdbcType="DOUBLE" property="salaryOther" />
+    <result column="salary_Three_gold" jdbcType="DOUBLE" property="salaryThreeGold" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="salary_tag" jdbcType="BIGINT" property="salaryTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    salary_id, salary_basic, salary_rank, salary_area, salary_bonus, salary_traffic, 
+    salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, salary_persion, 
+    salary_shop, salary_overtime, salary_work, deduct_inventory, "deduct_Late sales", 
+    deduct_social, deduct_uniform, deduct_other, salary_other, salary_Three_gold, time, 
+    userid, salary_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary (salary_id, salary_basic, salary_rank, 
+      salary_area, salary_bonus, salary_traffic, 
+      salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, 
+      salary_persion, salary_shop, salary_overtime, 
+      salary_work, deduct_inventory, "deduct_Late sales", 
+      deduct_social, deduct_uniform, deduct_other, 
+      salary_other, salary_Three_gold, time, 
+      userid, salary_tag)
+    values (#{salaryId,jdbcType=BIGINT}, #{salaryBasic,jdbcType=DOUBLE}, #{salaryRank,jdbcType=DOUBLE}, 
+      #{salaryArea,jdbcType=DOUBLE}, #{salaryBonus,jdbcType=DOUBLE}, #{salaryTraffic,jdbcType=DOUBLE}, 
+      #{salaryMealSubsidy,jdbcType=DOUBLE}, #{salaryWorkingAge,jdbcType=DOUBLE}, #{salarySocialSubsidies,jdbcType=DOUBLE}, 
+      #{salaryPersion,jdbcType=DOUBLE}, #{salaryShop,jdbcType=DOUBLE}, #{salaryOvertime,jdbcType=DOUBLE}, 
+      #{salaryWork,jdbcType=DOUBLE}, #{deductInventory,jdbcType=DOUBLE}, #{deductLateSales,jdbcType=DOUBLE}, 
+      #{deductSocial,jdbcType=DOUBLE}, #{deductUniform,jdbcType=DOUBLE}, #{deductOther,jdbcType=DOUBLE}, 
+      #{salaryOther,jdbcType=DOUBLE}, #{salaryThreeGold,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=BIGINT}, #{salaryTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        salary_id,
+      </if>
+      <if test="salaryBasic != null">
+        salary_basic,
+      </if>
+      <if test="salaryRank != null">
+        salary_rank,
+      </if>
+      <if test="salaryArea != null">
+        salary_area,
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus,
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic,
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy,
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age",
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies,
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion,
+      </if>
+      <if test="salaryShop != null">
+        salary_shop,
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime,
+      </if>
+      <if test="salaryWork != null">
+        salary_work,
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory,
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales",
+      </if>
+      <if test="deductSocial != null">
+        deduct_social,
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform,
+      </if>
+      <if test="deductOther != null">
+        deduct_other,
+      </if>
+      <if test="salaryOther != null">
+        salary_other,
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="salaryTag != null">
+        salary_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        #{salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="salaryBasic != null">
+        #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultType="java.lang.Long">
+    select count(*) from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_salary
+    <set>
+      <if test="record.salaryId != null">
+        salary_id = #{record.salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryBasic != null">
+        salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryRank != null">
+        salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryArea != null">
+        salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryBonus != null">
+        salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryTraffic != null">
+        salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryMealSubsidy != null">
+        salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWorkingAge != null">
+        "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salarySocialSubsidies != null">
+        salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryPersion != null">
+        salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryShop != null">
+        salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOvertime != null">
+        salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWork != null">
+        salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductInventory != null">
+        deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductLateSales != null">
+        "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductSocial != null">
+        deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductUniform != null">
+        deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductOther != null">
+        deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOther != null">
+        salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryThreeGold != null">
+        salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryTag != null">
+        salary_tag = #{record.salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_salary
+    set salary_id = #{record.salaryId,jdbcType=BIGINT},
+      salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=BIGINT},
+      salary_tag = #{record.salaryTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    <set>
+      <if test="salaryBasic != null">
+        salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        salary_area = #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        salary_work = #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        deduct_other = #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        salary_other = #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        salary_tag = #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    set salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      salary_area = #{salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{deductOther,jdbcType=DOUBLE},
+      salary_other = #{salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      salary_tag = #{salaryTag,jdbcType=BIGINT}
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Salary">
+    <id column="salary_id" jdbcType="BIGINT" property="salaryId" />
+    <result column="salary_basic" jdbcType="DOUBLE" property="salaryBasic" />
+    <result column="salary_rank" jdbcType="DOUBLE" property="salaryRank" />
+    <result column="salary_area" jdbcType="DOUBLE" property="salaryArea" />
+    <result column="salary_bonus" jdbcType="DOUBLE" property="salaryBonus" />
+    <result column="salary_traffic" jdbcType="DOUBLE" property="salaryTraffic" />
+    <result column="salary_meal_subsidy" jdbcType="DOUBLE" property="salaryMealSubsidy" />
+    <result column="salary_ working_age" jdbcType="DOUBLE" property="salaryWorkingAge" />
+    <result column="salary_social_subsidies" jdbcType="DOUBLE" property="salarySocialSubsidies" />
+    <result column="salary_persion" jdbcType="DOUBLE" property="salaryPersion" />
+    <result column="salary_shop" jdbcType="DOUBLE" property="salaryShop" />
+    <result column="salary_overtime" jdbcType="DOUBLE" property="salaryOvertime" />
+    <result column="salary_work" jdbcType="DOUBLE" property="salaryWork" />
+    <result column="deduct_inventory" jdbcType="DOUBLE" property="deductInventory" />
+    <result column="deduct_Late sales" jdbcType="DOUBLE" property="deductLateSales" />
+    <result column="deduct_social" jdbcType="DOUBLE" property="deductSocial" />
+    <result column="deduct_uniform" jdbcType="DOUBLE" property="deductUniform" />
+    <result column="deduct_other" jdbcType="DOUBLE" property="deductOther" />
+    <result column="salary_other" jdbcType="DOUBLE" property="salaryOther" />
+    <result column="salary_Three_gold" jdbcType="DOUBLE" property="salaryThreeGold" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="salary_tag" jdbcType="BIGINT" property="salaryTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    salary_id, salary_basic, salary_rank, salary_area, salary_bonus, salary_traffic, 
+    salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, salary_persion, 
+    salary_shop, salary_overtime, salary_work, deduct_inventory, "deduct_Late sales", 
+    deduct_social, deduct_uniform, deduct_other, salary_other, salary_Three_gold, time, 
+    userid, salary_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary (salary_id, salary_basic, salary_rank, 
+      salary_area, salary_bonus, salary_traffic, 
+      salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, 
+      salary_persion, salary_shop, salary_overtime, 
+      salary_work, deduct_inventory, "deduct_Late sales", 
+      deduct_social, deduct_uniform, deduct_other, 
+      salary_other, salary_Three_gold, time, 
+      userid, salary_tag)
+    values (#{salaryId,jdbcType=BIGINT}, #{salaryBasic,jdbcType=DOUBLE}, #{salaryRank,jdbcType=DOUBLE}, 
+      #{salaryArea,jdbcType=DOUBLE}, #{salaryBonus,jdbcType=DOUBLE}, #{salaryTraffic,jdbcType=DOUBLE}, 
+      #{salaryMealSubsidy,jdbcType=DOUBLE}, #{salaryWorkingAge,jdbcType=DOUBLE}, #{salarySocialSubsidies,jdbcType=DOUBLE}, 
+      #{salaryPersion,jdbcType=DOUBLE}, #{salaryShop,jdbcType=DOUBLE}, #{salaryOvertime,jdbcType=DOUBLE}, 
+      #{salaryWork,jdbcType=DOUBLE}, #{deductInventory,jdbcType=DOUBLE}, #{deductLateSales,jdbcType=DOUBLE}, 
+      #{deductSocial,jdbcType=DOUBLE}, #{deductUniform,jdbcType=DOUBLE}, #{deductOther,jdbcType=DOUBLE}, 
+      #{salaryOther,jdbcType=DOUBLE}, #{salaryThreeGold,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=BIGINT}, #{salaryTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        salary_id,
+      </if>
+      <if test="salaryBasic != null">
+        salary_basic,
+      </if>
+      <if test="salaryRank != null">
+        salary_rank,
+      </if>
+      <if test="salaryArea != null">
+        salary_area,
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus,
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic,
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy,
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age",
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies,
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion,
+      </if>
+      <if test="salaryShop != null">
+        salary_shop,
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime,
+      </if>
+      <if test="salaryWork != null">
+        salary_work,
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory,
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales",
+      </if>
+      <if test="deductSocial != null">
+        deduct_social,
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform,
+      </if>
+      <if test="deductOther != null">
+        deduct_other,
+      </if>
+      <if test="salaryOther != null">
+        salary_other,
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="salaryTag != null">
+        salary_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        #{salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="salaryBasic != null">
+        #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultType="java.lang.Long">
+    select count(*) from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_salary
+    <set>
+      <if test="record.salaryId != null">
+        salary_id = #{record.salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryBasic != null">
+        salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryRank != null">
+        salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryArea != null">
+        salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryBonus != null">
+        salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryTraffic != null">
+        salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryMealSubsidy != null">
+        salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWorkingAge != null">
+        "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salarySocialSubsidies != null">
+        salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryPersion != null">
+        salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryShop != null">
+        salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOvertime != null">
+        salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWork != null">
+        salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductInventory != null">
+        deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductLateSales != null">
+        "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductSocial != null">
+        deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductUniform != null">
+        deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductOther != null">
+        deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOther != null">
+        salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryThreeGold != null">
+        salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryTag != null">
+        salary_tag = #{record.salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_salary
+    set salary_id = #{record.salaryId,jdbcType=BIGINT},
+      salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=BIGINT},
+      salary_tag = #{record.salaryTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    <set>
+      <if test="salaryBasic != null">
+        salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        salary_area = #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        salary_work = #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        deduct_other = #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        salary_other = #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        salary_tag = #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    set salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      salary_area = #{salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{deductOther,jdbcType=DOUBLE},
+      salary_other = #{salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      salary_tag = #{salaryTag,jdbcType=BIGINT}
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Salary">
+    <id column="salary_id" jdbcType="BIGINT" property="salaryId" />
+    <result column="salary_basic" jdbcType="DOUBLE" property="salaryBasic" />
+    <result column="salary_rank" jdbcType="DOUBLE" property="salaryRank" />
+    <result column="salary_area" jdbcType="DOUBLE" property="salaryArea" />
+    <result column="salary_bonus" jdbcType="DOUBLE" property="salaryBonus" />
+    <result column="salary_traffic" jdbcType="DOUBLE" property="salaryTraffic" />
+    <result column="salary_meal_subsidy" jdbcType="DOUBLE" property="salaryMealSubsidy" />
+    <result column="salary_ working_age" jdbcType="DOUBLE" property="salaryWorkingAge" />
+    <result column="salary_social_subsidies" jdbcType="DOUBLE" property="salarySocialSubsidies" />
+    <result column="salary_persion" jdbcType="DOUBLE" property="salaryPersion" />
+    <result column="salary_shop" jdbcType="DOUBLE" property="salaryShop" />
+    <result column="salary_overtime" jdbcType="DOUBLE" property="salaryOvertime" />
+    <result column="salary_work" jdbcType="DOUBLE" property="salaryWork" />
+    <result column="deduct_inventory" jdbcType="DOUBLE" property="deductInventory" />
+    <result column="deduct_Late sales" jdbcType="DOUBLE" property="deductLateSales" />
+    <result column="deduct_social" jdbcType="DOUBLE" property="deductSocial" />
+    <result column="deduct_uniform" jdbcType="DOUBLE" property="deductUniform" />
+    <result column="deduct_other" jdbcType="DOUBLE" property="deductOther" />
+    <result column="salary_other" jdbcType="DOUBLE" property="salaryOther" />
+    <result column="salary_Three_gold" jdbcType="DOUBLE" property="salaryThreeGold" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="salary_tag" jdbcType="BIGINT" property="salaryTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    salary_id, salary_basic, salary_rank, salary_area, salary_bonus, salary_traffic, 
+    salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, salary_persion, 
+    salary_shop, salary_overtime, salary_work, deduct_inventory, "deduct_Late sales", 
+    deduct_social, deduct_uniform, deduct_other, salary_other, salary_Three_gold, time, 
+    userid, salary_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary (salary_id, salary_basic, salary_rank, 
+      salary_area, salary_bonus, salary_traffic, 
+      salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, 
+      salary_persion, salary_shop, salary_overtime, 
+      salary_work, deduct_inventory, "deduct_Late sales", 
+      deduct_social, deduct_uniform, deduct_other, 
+      salary_other, salary_Three_gold, time, 
+      userid, salary_tag)
+    values (#{salaryId,jdbcType=BIGINT}, #{salaryBasic,jdbcType=DOUBLE}, #{salaryRank,jdbcType=DOUBLE}, 
+      #{salaryArea,jdbcType=DOUBLE}, #{salaryBonus,jdbcType=DOUBLE}, #{salaryTraffic,jdbcType=DOUBLE}, 
+      #{salaryMealSubsidy,jdbcType=DOUBLE}, #{salaryWorkingAge,jdbcType=DOUBLE}, #{salarySocialSubsidies,jdbcType=DOUBLE}, 
+      #{salaryPersion,jdbcType=DOUBLE}, #{salaryShop,jdbcType=DOUBLE}, #{salaryOvertime,jdbcType=DOUBLE}, 
+      #{salaryWork,jdbcType=DOUBLE}, #{deductInventory,jdbcType=DOUBLE}, #{deductLateSales,jdbcType=DOUBLE}, 
+      #{deductSocial,jdbcType=DOUBLE}, #{deductUniform,jdbcType=DOUBLE}, #{deductOther,jdbcType=DOUBLE}, 
+      #{salaryOther,jdbcType=DOUBLE}, #{salaryThreeGold,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=BIGINT}, #{salaryTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        salary_id,
+      </if>
+      <if test="salaryBasic != null">
+        salary_basic,
+      </if>
+      <if test="salaryRank != null">
+        salary_rank,
+      </if>
+      <if test="salaryArea != null">
+        salary_area,
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus,
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic,
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy,
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age",
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies,
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion,
+      </if>
+      <if test="salaryShop != null">
+        salary_shop,
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime,
+      </if>
+      <if test="salaryWork != null">
+        salary_work,
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory,
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales",
+      </if>
+      <if test="deductSocial != null">
+        deduct_social,
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform,
+      </if>
+      <if test="deductOther != null">
+        deduct_other,
+      </if>
+      <if test="salaryOther != null">
+        salary_other,
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="salaryTag != null">
+        salary_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        #{salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="salaryBasic != null">
+        #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultType="java.lang.Long">
+    select count(*) from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_salary
+    <set>
+      <if test="record.salaryId != null">
+        salary_id = #{record.salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryBasic != null">
+        salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryRank != null">
+        salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryArea != null">
+        salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryBonus != null">
+        salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryTraffic != null">
+        salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryMealSubsidy != null">
+        salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWorkingAge != null">
+        "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salarySocialSubsidies != null">
+        salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryPersion != null">
+        salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryShop != null">
+        salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOvertime != null">
+        salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWork != null">
+        salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductInventory != null">
+        deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductLateSales != null">
+        "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductSocial != null">
+        deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductUniform != null">
+        deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductOther != null">
+        deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOther != null">
+        salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryThreeGold != null">
+        salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryTag != null">
+        salary_tag = #{record.salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_salary
+    set salary_id = #{record.salaryId,jdbcType=BIGINT},
+      salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=BIGINT},
+      salary_tag = #{record.salaryTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    <set>
+      <if test="salaryBasic != null">
+        salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        salary_area = #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        salary_work = #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        deduct_other = #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        salary_other = #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        salary_tag = #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    set salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      salary_area = #{salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{deductOther,jdbcType=DOUBLE},
+      salary_other = #{salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      salary_tag = #{salaryTag,jdbcType=BIGINT}
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Salary">
+    <id column="salary_id" jdbcType="BIGINT" property="salaryId" />
+    <result column="salary_basic" jdbcType="DOUBLE" property="salaryBasic" />
+    <result column="salary_rank" jdbcType="DOUBLE" property="salaryRank" />
+    <result column="salary_area" jdbcType="DOUBLE" property="salaryArea" />
+    <result column="salary_bonus" jdbcType="DOUBLE" property="salaryBonus" />
+    <result column="salary_traffic" jdbcType="DOUBLE" property="salaryTraffic" />
+    <result column="salary_meal_subsidy" jdbcType="DOUBLE" property="salaryMealSubsidy" />
+    <result column="salary_ working_age" jdbcType="DOUBLE" property="salaryWorkingAge" />
+    <result column="salary_social_subsidies" jdbcType="DOUBLE" property="salarySocialSubsidies" />
+    <result column="salary_persion" jdbcType="DOUBLE" property="salaryPersion" />
+    <result column="salary_shop" jdbcType="DOUBLE" property="salaryShop" />
+    <result column="salary_overtime" jdbcType="DOUBLE" property="salaryOvertime" />
+    <result column="salary_work" jdbcType="DOUBLE" property="salaryWork" />
+    <result column="deduct_inventory" jdbcType="DOUBLE" property="deductInventory" />
+    <result column="deduct_Late sales" jdbcType="DOUBLE" property="deductLateSales" />
+    <result column="deduct_social" jdbcType="DOUBLE" property="deductSocial" />
+    <result column="deduct_uniform" jdbcType="DOUBLE" property="deductUniform" />
+    <result column="deduct_other" jdbcType="DOUBLE" property="deductOther" />
+    <result column="salary_other" jdbcType="DOUBLE" property="salaryOther" />
+    <result column="salary_Three_gold" jdbcType="DOUBLE" property="salaryThreeGold" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="salary_tag" jdbcType="BIGINT" property="salaryTag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    salary_id, salary_basic, salary_rank, salary_area, salary_bonus, salary_traffic, 
+    salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, salary_persion, 
+    salary_shop, salary_overtime, salary_work, deduct_inventory, "deduct_Late sales", 
+    deduct_social, deduct_uniform, deduct_other, salary_other, salary_Three_gold, time, 
+    userid, salary_tag
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_salary
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary (salary_id, salary_basic, salary_rank, 
+      salary_area, salary_bonus, salary_traffic, 
+      salary_meal_subsidy, "salary_ working_age", salary_social_subsidies, 
+      salary_persion, salary_shop, salary_overtime, 
+      salary_work, deduct_inventory, "deduct_Late sales", 
+      deduct_social, deduct_uniform, deduct_other, 
+      salary_other, salary_Three_gold, time, 
+      userid, salary_tag)
+    values (#{salaryId,jdbcType=BIGINT}, #{salaryBasic,jdbcType=DOUBLE}, #{salaryRank,jdbcType=DOUBLE}, 
+      #{salaryArea,jdbcType=DOUBLE}, #{salaryBonus,jdbcType=DOUBLE}, #{salaryTraffic,jdbcType=DOUBLE}, 
+      #{salaryMealSubsidy,jdbcType=DOUBLE}, #{salaryWorkingAge,jdbcType=DOUBLE}, #{salarySocialSubsidies,jdbcType=DOUBLE}, 
+      #{salaryPersion,jdbcType=DOUBLE}, #{salaryShop,jdbcType=DOUBLE}, #{salaryOvertime,jdbcType=DOUBLE}, 
+      #{salaryWork,jdbcType=DOUBLE}, #{deductInventory,jdbcType=DOUBLE}, #{deductLateSales,jdbcType=DOUBLE}, 
+      #{deductSocial,jdbcType=DOUBLE}, #{deductUniform,jdbcType=DOUBLE}, #{deductOther,jdbcType=DOUBLE}, 
+      #{salaryOther,jdbcType=DOUBLE}, #{salaryThreeGold,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=BIGINT}, #{salaryTag,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    insert into hr_salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        salary_id,
+      </if>
+      <if test="salaryBasic != null">
+        salary_basic,
+      </if>
+      <if test="salaryRank != null">
+        salary_rank,
+      </if>
+      <if test="salaryArea != null">
+        salary_area,
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus,
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic,
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy,
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age",
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies,
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion,
+      </if>
+      <if test="salaryShop != null">
+        salary_shop,
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime,
+      </if>
+      <if test="salaryWork != null">
+        salary_work,
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory,
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales",
+      </if>
+      <if test="deductSocial != null">
+        deduct_social,
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform,
+      </if>
+      <if test="deductOther != null">
+        deduct_other,
+      </if>
+      <if test="salaryOther != null">
+        salary_other,
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="salaryTag != null">
+        salary_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salaryId != null">
+        #{salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="salaryBasic != null">
+        #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultType="java.lang.Long">
+    select count(*) from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_salary
+    <set>
+      <if test="record.salaryId != null">
+        salary_id = #{record.salaryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryBasic != null">
+        salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryRank != null">
+        salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryArea != null">
+        salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryBonus != null">
+        salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryTraffic != null">
+        salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryMealSubsidy != null">
+        salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWorkingAge != null">
+        "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salarySocialSubsidies != null">
+        salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryPersion != null">
+        salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryShop != null">
+        salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOvertime != null">
+        salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryWork != null">
+        salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductInventory != null">
+        deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductLateSales != null">
+        "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductSocial != null">
+        deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductUniform != null">
+        deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deductOther != null">
+        deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryOther != null">
+        salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryThreeGold != null">
+        salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.salaryTag != null">
+        salary_tag = #{record.salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_salary
+    set salary_id = #{record.salaryId,jdbcType=BIGINT},
+      salary_basic = #{record.salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{record.salaryRank,jdbcType=DOUBLE},
+      salary_area = #{record.salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{record.salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{record.salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{record.salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{record.salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{record.salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{record.salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{record.salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{record.salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{record.salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{record.deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{record.deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{record.deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{record.deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{record.deductOther,jdbcType=DOUBLE},
+      salary_other = #{record.salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{record.salaryThreeGold,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=BIGINT},
+      salary_tag = #{record.salaryTag,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    <set>
+      <if test="salaryBasic != null">
+        salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryRank != null">
+        salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryArea != null">
+        salary_area = #{salaryArea,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBonus != null">
+        salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryTraffic != null">
+        salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryMealSubsidy != null">
+        salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWorkingAge != null">
+        "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      </if>
+      <if test="salarySocialSubsidies != null">
+        salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryPersion != null">
+        salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryShop != null">
+        salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOvertime != null">
+        salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryWork != null">
+        salary_work = #{salaryWork,jdbcType=DOUBLE},
+      </if>
+      <if test="deductInventory != null">
+        deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      </if>
+      <if test="deductLateSales != null">
+        "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      </if>
+      <if test="deductSocial != null">
+        deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="deductUniform != null">
+        deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      </if>
+      <if test="deductOther != null">
+        deduct_other = #{deductOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryOther != null">
+        salary_other = #{salaryOther,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryThreeGold != null">
+        salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="salaryTag != null">
+        salary_tag = #{salaryTag,jdbcType=BIGINT},
+      </if>
+    </set>
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Salary">
+    update hr_salary
+    set salary_basic = #{salaryBasic,jdbcType=DOUBLE},
+      salary_rank = #{salaryRank,jdbcType=DOUBLE},
+      salary_area = #{salaryArea,jdbcType=DOUBLE},
+      salary_bonus = #{salaryBonus,jdbcType=DOUBLE},
+      salary_traffic = #{salaryTraffic,jdbcType=DOUBLE},
+      salary_meal_subsidy = #{salaryMealSubsidy,jdbcType=DOUBLE},
+      "salary_ working_age" = #{salaryWorkingAge,jdbcType=DOUBLE},
+      salary_social_subsidies = #{salarySocialSubsidies,jdbcType=DOUBLE},
+      salary_persion = #{salaryPersion,jdbcType=DOUBLE},
+      salary_shop = #{salaryShop,jdbcType=DOUBLE},
+      salary_overtime = #{salaryOvertime,jdbcType=DOUBLE},
+      salary_work = #{salaryWork,jdbcType=DOUBLE},
+      deduct_inventory = #{deductInventory,jdbcType=DOUBLE},
+      "deduct_Late sales" = #{deductLateSales,jdbcType=DOUBLE},
+      deduct_social = #{deductSocial,jdbcType=DOUBLE},
+      deduct_uniform = #{deductUniform,jdbcType=DOUBLE},
+      deduct_other = #{deductOther,jdbcType=DOUBLE},
+      salary_other = #{salaryOther,jdbcType=DOUBLE},
+      salary_Three_gold = #{salaryThreeGold,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      salary_tag = #{salaryTag,jdbcType=BIGINT}
+    where salary_id = #{salaryId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_SalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

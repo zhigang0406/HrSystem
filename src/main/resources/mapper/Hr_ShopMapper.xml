@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorponok.base.mapper.Hr_ShopMapper">
+  <resultMap id="BaseResultMap" type="com.scorponok.base.entity.Hr_Shop">
+    <id column="shop_id" jdbcType="BIGINT" property="shopId" />
+    <result column="shop_number" jdbcType="VARCHAR" property="shopNumber" />
+    <result column="shop_brandid" jdbcType="BIGINT" property="shopBrandid" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="shop_area_id" jdbcType="BIGINT" property="shopAreaId" />
+    <result column="shop_creation_time" jdbcType="TIMESTAMP" property="shopCreationTime" />
+    <result column="shop_job_number" jdbcType="VARCHAR" property="shopJobNumber" />
+    <result column="shop_hr" jdbcType="VARCHAR" property="shopHr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shop_id, shop_number, shop_brandid, shop_name, shop_area_id, shop_creation_time, 
+    shop_job_number, shop_hr
+  </sql>
+  <select id="selectByExample" parameterType="com.scorponok.base.entity.Hr_ShopExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hr_shop
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hr_shop
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.scorponok.base.entity.Hr_Shop">
+    insert into hr_shop (shop_id, shop_number, shop_brandid, 
+      shop_name, shop_area_id, shop_creation_time, 
+      shop_job_number, shop_hr)
+    values (#{shopId,jdbcType=BIGINT}, #{shopNumber,jdbcType=VARCHAR}, #{shopBrandid,jdbcType=BIGINT}, 
+      #{shopName,jdbcType=VARCHAR}, #{shopAreaId,jdbcType=BIGINT}, #{shopCreationTime,jdbcType=TIMESTAMP}, 
+      #{shopJobNumber,jdbcType=VARCHAR}, #{shopHr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scorponok.base.entity.Hr_Shop">
+    insert into hr_shop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="shopNumber != null">
+        shop_number,
+      </if>
+      <if test="shopBrandid != null">
+        shop_brandid,
+      </if>
+      <if test="shopName != null">
+        shop_name,
+      </if>
+      <if test="shopAreaId != null">
+        shop_area_id,
+      </if>
+      <if test="shopCreationTime != null">
+        shop_creation_time,
+      </if>
+      <if test="shopJobNumber != null">
+        shop_job_number,
+      </if>
+      <if test="shopHr != null">
+        shop_hr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopNumber != null">
+        #{shopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopBrandid != null">
+        #{shopBrandid,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAreaId != null">
+        #{shopAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="shopCreationTime != null">
+        #{shopCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopJobNumber != null">
+        #{shopJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopHr != null">
+        #{shopHr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scorponok.base.entity.Hr_ShopExample" resultType="java.lang.Long">
+    select count(*) from hr_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hr_shop
+    <set>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shopNumber != null">
+        shop_number = #{record.shopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopBrandid != null">
+        shop_brandid = #{record.shopBrandid,jdbcType=BIGINT},
+      </if>
+      <if test="record.shopName != null">
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAreaId != null">
+        shop_area_id = #{record.shopAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shopCreationTime != null">
+        shop_creation_time = #{record.shopCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shopJobNumber != null">
+        shop_job_number = #{record.shopJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopHr != null">
+        shop_hr = #{record.shopHr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hr_shop
+    set shop_id = #{record.shopId,jdbcType=BIGINT},
+      shop_number = #{record.shopNumber,jdbcType=VARCHAR},
+      shop_brandid = #{record.shopBrandid,jdbcType=BIGINT},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_area_id = #{record.shopAreaId,jdbcType=BIGINT},
+      shop_creation_time = #{record.shopCreationTime,jdbcType=TIMESTAMP},
+      shop_job_number = #{record.shopJobNumber,jdbcType=VARCHAR},
+      shop_hr = #{record.shopHr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scorponok.base.entity.Hr_Shop">
+    update hr_shop
+    <set>
+      <if test="shopNumber != null">
+        shop_number = #{shopNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopBrandid != null">
+        shop_brandid = #{shopBrandid,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null">
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAreaId != null">
+        shop_area_id = #{shopAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="shopCreationTime != null">
+        shop_creation_time = #{shopCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopJobNumber != null">
+        shop_job_number = #{shopJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopHr != null">
+        shop_hr = #{shopHr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scorponok.base.entity.Hr_Shop">
+    update hr_shop
+    set shop_number = #{shopNumber,jdbcType=VARCHAR},
+      shop_brandid = #{shopBrandid,jdbcType=BIGINT},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_area_id = #{shopAreaId,jdbcType=BIGINT},
+      shop_creation_time = #{shopCreationTime,jdbcType=TIMESTAMP},
+      shop_job_number = #{shopJobNumber,jdbcType=VARCHAR},
+      shop_hr = #{shopHr,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.scorponok.base.entity.Hr_ShopExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
